@@ -20,6 +20,40 @@ class Expressions:
 
     default_numbers=[4, 12, 3, 8, 17, 12, 1, 8, 7]
 
+    def get_first_three(numbers):
+        return numbers[:3]
+
+    def get_last_three(numbers):
+        return numbers[-3:]
+
+    def get_last_three_reversed(numbers):
+        return numbers[-3:][::-1]
+
+    def get_odd_numbers(numbers):
+        return [n for n in numbers if n % 2 == 1]
+
+    def count_odd_numbers(numbers):
+        return sum(1 for n in numbers if n % 2 == 1)
+
+    def sum_odd_numbers(numbers):
+        return sum(n for n in numbers if n % 2 == 1)
+
+    def remove_duplicates(numbers):
+        return list(dict.fromkeys(numbers))  # preserves order
+
+    def count_duplicates(numbers):
+        return len(numbers) - len(Expressions.remove_duplicates(numbers))
+
+    def get_squared_sorted_unique(numbers):
+        return sorted({n ** 2 for n in numbers})
+
+    def get_length_label(numbers):
+        length = len(numbers)
+        if length == 0:
+            return "EMPTY_LIST"
+        return "ODD_LIST" if length % 2 == 1 else "EVEN_LIST"
+
+
     def __init__(self, _numbers=default_numbers):
         """
         Constructor to initialize member variables.
@@ -27,37 +61,37 @@ class Expressions:
         self.numbers = _numbers
 
         # a) initialize with number of numbers: 9
-        self.a = len(self.numbers)    # <-- given solution, insert one-line expressions below
+        self.a = len(self.numbers)
 
         # b) initialize with first three numbers: [4, 12, 3]
-        self.b = []      # <-- write expression here
+        self.b = Expressions.get_first_three(self.numbers)
 
         # c) initialize with last three numbers: [1, 8, 7]
-        self.c = []
+        self.c = Expressions.get_last_three(self.numbers)
 
         # d) initialize with last three numbers reverse: [7, 8, 1]
-        self.d = []
+        self.d = Expressions.get_last_three_reversed(self.numbers)
 
         # e) initialize with odd numbers: [3, 17, 1, 7]
-        self.e = []
+        self.e = Expressions.get_odd_numbers(self.numbers)
 
         # f) initialize with number of odd numbers: 4
-        self.f = 0
+        self.f = Expressions.count_odd_numbers(self.numbers)
 
         # g) initialize with sum_ of odd numbers: 28
-        self.g = 0
+        self.g = Expressions.sum_odd_numbers(self.numbers)
 
         # h) duplicate numbers removed: [4, 12, 3, 8, 17, 1, 7]
-        self.h = []
+        self.h = Expressions.remove_duplicates(self.numbers)
 
         # i) number of duplicate numbers: 2
-        self.i = 0
+        self.i = Expressions.count_duplicates(self.numbers)
 
         # j) ascending list of squared numbers with no duplicates: [1, 9, 16, 49, 64, 144, 289]
-        self.j = []
+        self.j = Expressions.get_squared_sorted_unique(self.numbers)
 
         # k) initialize with "ODD_LIST", "EVEN_LIST" or "EMPTY_LIST" depending on numbers length
-        self.k = "NEITHER"
+        self.k = Expressions.get_length_label(self.numbers)
 
 
     def print_results(self):
